@@ -19,7 +19,7 @@
 
 # default, edit version 
 tcpdump_ver=4.5.1
-libpcap_ver=1.5.2
+libpcap_ver=1.5.3
 android_api_def=10
 
 #-------------------------------------------------------#
