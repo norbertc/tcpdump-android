@@ -7,6 +7,11 @@ Modified by Norbert Copones for Android Lollipop.
 
 Build
 -----
+    $ mkdir tcpdumpbuild
+    $ cd tcpdumpbuild
+    $ tar xvfz tcpdump-x.x.x.tar.gz
+    $ cd tcpdump-x.x.x
+
 Patch tcpdump configure script using the diff below:
 
 ```
