@@ -2,7 +2,7 @@
 
 # --------------------------------------
 #
-#     Title: build-tcpdump
+#    Title: build-tcpdump
 #    Author: Loic Poulain, loic.poulain@gmail.com
 #
 #   Purpose: download & build tcpdump for arm android platform
@@ -12,7 +12,7 @@
 # $ export NDK=/home/Workspace/android-ndk-r8
 # $ sh build-tcpdump
 #
-# functionnal
+# functional
 # 	with tcpdump 4.3.0, 4.2.1
 # 	with android-ndk-r8
 # --------------------------------------
@@ -21,6 +21,7 @@
 tcpdump_ver=4.6.2
 libpcap_ver=1.6.2
 android_api_def=21
+toolchain_ver=arm-linux-androideabi-4.9
 
 #-------------------------------------------------------#
 ndk_dir_def=android-ndk-r10c
@@ -92,7 +93,7 @@ exit_error()
 	else
 		echo Creating toolchain...
 		mkdir toolchain
-		sh ${ndk_dir}/build/tools/make-standalone-toolchain.sh --platform=android-${android_api} --toolchain=arm-linux-androideabi-4.9 --install-dir=toolchain
+		sh ${ndk_dir}/build/tools/make-standalone-toolchain.sh --platform=android-${android_api} --toolchain=${toolchain_ver} --install-dir=toolchain
 		
 		if [ $? -ne 0 ]
 		then
