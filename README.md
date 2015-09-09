@@ -7,28 +7,8 @@ Modified by Norbert Copones for Android Lollipop.
 
 Build
 -----
-    $ mkdir tcpdumpbuild
-    $ cd tcpdumpbuild
-    $ tar xvfz tcpdump-x.x.x.tar.gz
-    $ cd tcpdump-x.x.x
 
-Patch tcpdump configure script using the diff below:
-
-```
-    --- configure.old
-    +++ configure
-    @@ -5107,7 +5107,7 @@
-       $as_echo_n "(cached) " >&6
-     else
-       if test "$cross_compiling" = yes; then :
-    -  td_cv_buggygetaddrinfo=yes
-    +  td_cv_buggygetaddrinfo=no
-     else
-       cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-     /* end confdefs.h.  */
-```
-
-Install the [Android NDK](https://developer.android.com/tools/sdk/ndk/index.html) then:  
+Install the [Android NDK](https://developer.android.com/ndk/downloads/index.html) then:  
 
     export NDK=/path/to/ndk 
     ./build-tcpdump
