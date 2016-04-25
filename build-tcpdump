@@ -2,28 +2,23 @@
 
 # --------------------------------------
 #
-#     Title: build-tcpdump
-#    Author: Loic Poulain, loic.poulain@gmail.com
+#   Title: build-tcpdump
+#   Original Author: Loic Poulain, loic.poulain@gmail.com
+#   Modified by: Norbert Copones, norbert.copones@gmail.com
 #
-#   Purpose: download & build tcpdump for arm android platform
+#   Purpose: download & build tcpdump for arm/aarch64 android platform
 #
-# You have to define your android NDK directory before calling this script
-# example:
-# $ export NDK=/home/Workspace/android-ndk-r8
-# $ sh build-tcpdump
-#
-# functionnal
-# 	with tcpdump 4.3.0, 4.2.1
-# 	with android-ndk-r8
-# --------------------------------------
-
-# default, edit version 
+# set defaults
 tcpdump_ver=4.7.4
 libpcap_ver=1.7.4
-android_api_def=21
-
-#-------------------------------------------------------#
-ndk_dir_def=android-ndk-r10e
+android_api_def=23
+toolchain64_def=aarch64-linux-android-4.9
+toolchain32_def=arm-linux-androideabi-4.9
+ccompile64_def=aarch64-linux-android-
+ccompile32_def=arm-linux-androideabi-
+host32_def=arm-linux-androideabi
+host64_def=aarch64-linux-android
+ndk_dir_def=/home/norbert/android/android-ndk-r11c
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
 libpcap_dir=libpcap-${libpcap_ver}
@@ -45,19 +40,26 @@ else
 	android_api=${android_api_def}
 fi
 
-echo "_______________________"
-echo ""
-echo "NDK - ${ndk_dir}"
-echo "Android API: ${android_api}"
-echo "_______________________"
+if [ "${ARCH}" = "arm" ]
+then
+	cctoolchain=${toolchain32_def}
+	ccompile=${ccompile32_def}
+	cchost=${host32_def}
+else
+	ARCH=arm64
+	cctoolchain=${toolchain64_def}
+	ccompile=${ccompile64_def}
+	cchost=${host64_def}
+fi
 
+echo "==> Compiling using the following:"
+echo "==> Android NDK path: ${ndk_dir}"
+echo "==> Android API: ${android_api}"
+echo "==> Arch: ${ARCH}"
 
 exit_error()
 {
-	echo " _______"
-	echo "|       |"
-	echo "| ERROR |"
-	echo "|_______|"
+	echo "==> Error!"
 	exit 1
 }
 
@@ -72,7 +74,7 @@ exit_error()
 			exit_error
 		fi
 	else
-		mkdir tcpdumpbuild
+		[ ! -d tcpdumpbuild ] && mkdir tcpdumpbuild
 		cd tcpdumpbuild
 	fi
 }
@@ -81,10 +83,7 @@ exit_error()
 
 # create env
 {
-	echo " ____________________"
-	echo "|                    |"
-	echo "| CREATING TOOLCHAIN |"
-	echo "|____________________|"
+	echo "==> Creating toolchain"
 
 	if [ -d toolchain ]
 	then
@@ -92,7 +91,7 @@ exit_error()
 	else
 		echo Creating toolchain...
 		mkdir toolchain
-		sh ${ndk_dir}/build/tools/make-standalone-toolchain.sh --platform=android-${android_api} --toolchain=arm-linux-androideabi-4.9 --install-dir=toolchain
+		sh ${ndk_dir}/build/tools/make-standalone-toolchain.sh --platform=android-${android_api} --toolchain=${cctoolchain} --install-dir=toolchain
 		
 		if [ $? -ne 0 ]
 		then
@@ -101,20 +100,17 @@ exit_error()
 		fi
 	fi
 
-	export CC=arm-linux-androideabi-gcc
+	export CC=${ccompile}gcc
 	export CFLAGS="-fPIE -pie"
-	export RANLIB=arm-linux-androideabi-ranlib
-	export AR=arm-linux-androideabi-ar
-	export LD=arm-linux-androideabi-ld
+	export RANLIB=${ccompile}ranlib
+	export AR=${ccompile}ar
+	export LD=${ccompile}ld
 	export PATH=`pwd`/toolchain/bin:$PATH
 }
 
 # download & untar libpcap + tcpdump
 {
-	echo " _______________________________"
-	echo "|                               |"
-	echo "| DOWNLOADING LIBPCAP & TCPDUMP |"
-	echo "|_______________________________|"
+	echo "==> Downloading libpcap and tcpdump"
 	
 	tcpdump_file=${tcpdump_dir}.tar.gz
 	libpcap_file=${libpcap_dir}.tar.gz
@@ -166,23 +162,17 @@ exit_error()
 {
 	cd ${libpcap_dir}
 
-	echo " _____________________"
-	echo "|                     |"
-	echo "| CONFIGURING LIBPCAP |"
-	echo "|_____________________|"
+	echo "==> Configuring libpcap"
 
 	chmod +x configure
-	./configure --host=arm-linux --with-pcap=linux ac_cv_linux_vers=2
+	./configure --host=aarch64-linux --with-pcap=linux ac_cv_linux_vers=2
 
 	if [ $? -ne 0 ]
 	then
 		exit_error
 	fi	
 
-	echo " __________________"
-	echo "|                  |"
-	echo "| BUILDING LIBPCAP |"
-	echo "|__________________|"
+	echo "==> Building libpcap"
 
 	chmod +x runlex.sh
 	make
@@ -199,23 +189,17 @@ exit_error()
 {
 	cd ${tcpdump_dir}
 	
-	echo " _____________________"
-	echo "|                     |"
-	echo "| CONFIGURING TCPDUMP |"
-	echo "|_____________________|"
+	echo "==> Configuring tcpdump"
 	
 	chmod +x configure
-	./configure --host=arm-linux --with-pcap=linux ac_cv_linux_vers=2 --with-crypto=no
+	./configure --host=aarch64-linux ac_cv_linux_vers=2 --with-crypto=no
 
 	if [ $? -ne 0 ]
 	then
 		exit_error
 	fi	
 
-	echo " __________________"
-	echo "|                  |"
-	echo "| BUILDING TCPDUMP |"
-	echo "|__________________|"
+	echo "==> Building tcpdump"
 	
 	#setprotoent endprotoen not supported on android
 	sed -i".bak" "s/setprotoent/\/\/setprotoent/g" print-isakmp.c
@@ -234,9 +218,4 @@ exit_error()
 
 cp ${tcpdump_dir}/tcpdump .
 chmod +x tcpdump
-
-echo " __________________"
-echo "|                  |"
-echo "| TCPDUMP IS READY |"
-echo "|__________________|"
-echo `pwd`/tcpdump
+echo "==> Finished building. Binary located at `pwd`/tcpdump."
