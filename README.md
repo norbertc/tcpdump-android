@@ -9,14 +9,11 @@ Build
 -----
 Install the [Android NDK](https://developer.android.com/ndk/downloads/index.html) then:  
 
-    export NDK=/path/to/ndk 
-    ./build-tcpdump
+    NDK=/path/to/ndk ./build-tcpdump
 
 By default, aarch64 binaries will be built. To build for arm 32-bit:
 
-    export NDK=/path/to/ndk
-    export ARCH=arm
-    ./build-tcpdump
+   NDK=/path/to/ndk ARCH=arm ./build-tcpdump
 
 Install on Android
 ------------------
