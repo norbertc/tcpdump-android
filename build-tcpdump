@@ -119,7 +119,7 @@ exit_error()
 	
 	if [ -f ${tcpdump_file} ]
 	then
-		echo ${tcpdump_file} already downloaded! Nothing to do.
+		echo "==> ${tcpdump_file} already downloaded! Nothing to do."
 	else
 		echo Download ${tcpdump_file}...
 		wget ${tcpdump_link}
@@ -131,7 +131,7 @@ exit_error()
 	
 	if [ -f ${libpcap_file} ]
 	then
-		echo ${libpcap_file} already downloaded! Nothing to do.
+		echo "==> ${libpcap_file} already downloaded! Nothing to do."
 	else
 		echo Download ${libpcap_file}...
 		wget ${libpcap_link}
@@ -143,7 +143,7 @@ exit_error()
 	
 	if [ -d ${tcpdump_dir} ]
 	then
-		echo ${tcpdump_dir} directory already exist! Nothing to do.
+		echo "==> ${tcpdump_dir} directory already exist! Nothing to do."
 	else
 		echo untar ${tcpdump_file}
 		tar -zxf ${tcpdump_file}
@@ -151,7 +151,7 @@ exit_error()
 	
 	if [ -d ${libpcap_dir} ]
 	then
-		echo ${libpcap_dir} directory already exist! Nothing to do.
+		echo "==> ${libpcap_dir} directory already exist! Nothing to do."
 	else
 		echo untar ${libpcap_file}
 		tar -zxf ${libpcap_file}
@@ -165,7 +165,7 @@ exit_error()
 	echo "==> Configuring libpcap"
 
 	chmod +x configure
-	./configure --host=aarch64-linux --with-pcap=linux ac_cv_linux_vers=2
+	./configure --host=aarch64-linux --with-pcap=linux ac_cv_linux_vers=2 --enable-ipv6
 
 	if [ $? -ne 0 ]
 	then
@@ -192,7 +192,7 @@ exit_error()
 	echo "==> Configuring tcpdump"
 	
 	chmod +x configure
-	./configure --host=aarch64-linux ac_cv_linux_vers=2 --with-crypto=no
+	./configure --host=aarch64-linux ac_cv_linux_vers=2 --with-crypto=no --enable-ipv6
 
 	if [ $? -ne 0 ]
 	then
