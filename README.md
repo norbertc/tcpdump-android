@@ -15,6 +15,31 @@ By default, aarch64 binaries will be built. To build for arm 32-bit:
 
     NDK=/path/to/ndk ARCH=arm ./build-tcpdump
 
+Build with BoringSSL (optional)
+-------------------------------
+
+To build with BoringSSL libcrypto support, [compile BoringSSL](https://boringssl.googlesource.com/boringssl/+/HEAD/BUILDING.md).
+Copy BoringSSL include/openssl and headers to the NDK platform include directory (e.g. NDK_ROOT/platforms/android-23/arch-arm64/usr/include):
+
+    e.g.
+    cd /path/to/BoringSSL/source
+    cd include
+    cp -r openssl /NDK_ROOT/platforms/android-XX/<arch>/usr/include
+
+Copy BoringSSL libcrypto.so and libssl.so to the NDK platform lib directory (e.g. NDK_ROOT/platforms/android-23/arch-arm64/usr/lib):
+
+    e.g.
+    cd /path/to/BoringSSL/build/dir
+    cp crypto/libcrypto.so NDK_ROOT/platforms/android-XX/<arch>/usr/lib
+    cp ssl/libssl.so NDK_ROOT/platforms/android-XX/<arch>/usr/lib
+
+Patch the configure and configure.in file:
+
+    patch -p0 < configure.patch
+    patch -p0 < configure.in.patch
+
+Build using ./build-tcpdump
+
 Install on Android
 ------------------
     $ adb push tcpdumpbuild/tcpdump /sdcard/

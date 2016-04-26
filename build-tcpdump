@@ -192,7 +192,7 @@ exit_error()
 	echo "==> Configuring tcpdump"
 	
 	chmod +x configure
-	./configure --host=aarch64-linux ac_cv_linux_vers=2 --with-crypto=no --enable-ipv6
+	./configure --host=aarch64-linux ac_cv_linux_vers=2 --with-crypto --enable-ipv6
 
 	if [ $? -ne 0 ]
 	then
