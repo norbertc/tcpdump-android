@@ -16,8 +16,8 @@ toolchain64_def=aarch64-linux-android-4.9
 toolchain32_def=arm-linux-androideabi-4.9
 ccompile64_def=aarch64-linux-android-
 ccompile32_def=arm-linux-androideabi-
-host32_def=arm-linux-androideabi
-host64_def=aarch64-linux-android
+host32_def=arm-linux
+host64_def=aarch64-linux
 ndk_dir_def=/home/norbert/android/android-ndk-r11c
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
@@ -165,7 +165,7 @@ exit_error()
 	echo "==> Configuring libpcap"
 
 	chmod +x configure
-	./configure --host=aarch64-linux --with-pcap=linux ac_cv_linux_vers=2 --enable-ipv6
+	./configure --host=${cchost} --with-pcap=linux ac_cv_linux_vers=2 --enable-ipv6
 
 	if [ $? -ne 0 ]
 	then
@@ -192,7 +192,7 @@ exit_error()
 	echo "==> Configuring tcpdump"
 	
 	chmod +x configure
-	./configure --host=aarch64-linux ac_cv_linux_vers=2 --with-crypto --enable-ipv6
+	./configure --host=${cchost} ac_cv_linux_vers=2 --with-crypto --enable-ipv6
 
 	if [ $? -ne 0 ]
 	then
