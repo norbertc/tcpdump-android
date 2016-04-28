@@ -1,11 +1,50 @@
---- configure.in.orig	2016-04-27 03:51:05.285858499 +0800
-+++ configure.in	2016-04-27 03:22:21.000000000 +0800
-@@ -1112,7 +1112,7 @@
- 	AC_MSG_RESULT([yes, if available])
- ])
- if test "$want_libcrypto" != "no"; then
--	AC_CHECK_LIB(crypto, DES_cbc_encrypt)
-+	AC_CHECK_LIB(crypto, DES_ncbc_encrypt)
- 	AC_CHECK_HEADERS(openssl/evp.h)
+--- configure.orig
++++ configure
+@@ -8161,9 +8161,9 @@
  fi
  
+ if test "$want_libcrypto" != "no"; then
+-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for DES_cbc_encrypt in -lcrypto" >&5
+-$as_echo_n "checking for DES_cbc_encrypt in -lcrypto... " >&6; }
+-if ${ac_cv_lib_crypto_DES_cbc_encrypt+:} false; then :
++	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for DES_ncbc_encrypt in -lcrypto" >&5
++$as_echo_n "checking for DES_ncbc_encrypt in -lcrypto... " >&6; }
++if ${ac_cv_lib_crypto_DES_ncbc_encrypt+:} false; then :
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+@@ -8177,27 +8177,27 @@
+ #ifdef __cplusplus
+ extern "C"
+ #endif
+-char DES_cbc_encrypt ();
++char DES_ncbc_encrypt ();
+ int
+ main ()
+ {
+-return DES_cbc_encrypt ();
++return DES_ncbc_encrypt ();
+   ;
+   return 0;
+ }
+ _ACEOF
+ if ac_fn_c_try_link "$LINENO"; then :
+-  ac_cv_lib_crypto_DES_cbc_encrypt=yes
++  ac_cv_lib_crypto_DES_ncbc_encrypt=yes
+ else
+-  ac_cv_lib_crypto_DES_cbc_encrypt=no
++  ac_cv_lib_crypto_DES_ncbc_encrypt=no
+ fi
+ rm -f core conftest.err conftest.$ac_objext \
+     conftest$ac_exeext conftest.$ac_ext
+ LIBS=$ac_check_lib_save_LIBS
+ fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_crypto_DES_cbc_encrypt" >&5
+-$as_echo "$ac_cv_lib_crypto_DES_cbc_encrypt" >&6; }
+-if test "x$ac_cv_lib_crypto_DES_cbc_encrypt" = xyes; then :
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_crypto_DES_ncbc_encrypt" >&5
++$as_echo "$ac_cv_lib_crypto_DES_ncbc_encrypt" >&6; }
++if test "x$ac_cv_lib_crypto_DES_ncbc_encrypt" = xyes; then :
+   cat >>confdefs.h <<_ACEOF
+ #define HAVE_LIBCRYPTO 1
+ _ACEOF
