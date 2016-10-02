@@ -11,14 +11,14 @@
 # set defaults
 tcpdump_ver=4.7.4
 libpcap_ver=1.7.4
-android_api_def=23
+android_api_def=24
 toolchain64_def=aarch64-linux-android-4.9
 toolchain32_def=arm-linux-androideabi-4.9
 ccompile64_def=aarch64-linux-android-
 ccompile32_def=arm-linux-androideabi-
 host32_def=arm-linux
 host64_def=aarch64-linux
-ndk_dir_def=/home/norbert/android/android-ndk-r11c
+ndk_dir_def=/home/norbert/android/android-ndk-r12b
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
 libpcap_dir=libpcap-${libpcap_ver}
@@ -91,7 +91,7 @@ exit_error()
 	else
 		echo Creating toolchain...
 		mkdir toolchain
-		sh ${ndk_dir}/build/tools/make-standalone-toolchain.sh --platform=android-${android_api} --toolchain=${cctoolchain} --install-dir=toolchain
+		${ndk_dir}/build/tools/make_standalone_toolchain.py --api ${android_api} --arch ${ARCH} --install-dir=toolchain --force
 		
 		if [ $? -ne 0 ]
 		then
