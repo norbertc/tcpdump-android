@@ -17,7 +17,7 @@ By default, aarch64 binaries will be built. To build for arm 32-bit:
 
 In case, libpcap configure script is having an issue detecting getifaddrs(), patch libpcap configure script:
 
-    patch -p0 < libpcap-configure
+    patch -p0 < libpcap-configure.patch
 
 Build using ./build-tcpdump
 
