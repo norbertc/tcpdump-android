@@ -1,0 +1,21 @@
+--- configure	2015-04-23 04:19:15.000000000 +0800
++++ ../libpcap-1.7.4.new/configure	2016-10-02 12:29:03.000000000 +0800
+@@ -5940,16 +5940,8 @@
+ 
+ else
+ 
+-		    #
+-		    # We don't have the header - give up.
+-		    # XXX - we could also fall back on some other
+-		    # mechanism, but, for now, this'll catch this
+-		    # problem so that we can at least try to figure
+-		    # out something to do on systems with "getifaddrs()"
+-		    # but without "ifaddrs.h", if there is something
+-		    # we can do on those systems.
+-		    #
+-		    as_fn_error $? "Your system has getifaddrs() but doesn't have a usable <ifaddrs.h>." "$LINENO" 5
++                    # We don't have the header - use null instead
++                    V_FINDALLDEVS=null
+ 
+ fi
+ 
