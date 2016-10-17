@@ -18,7 +18,7 @@ ccompile64_def=aarch64-linux-android-
 ccompile32_def=arm-linux-androideabi-
 host32_def=arm-linux
 host64_def=aarch64-linux
-ndk_dir_def=/home/norbert/android/android-ndk-r12b
+ndk_dir_def=/home/norbert/android/android-ndk-r13
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
 libpcap_dir=libpcap-${libpcap_ver}
@@ -101,7 +101,7 @@ exit_error()
 	fi
 
 	export CC=${ccompile}gcc
-	export CFLAGS="-fPIE -pie"
+	export CFLAGS="-fPIE -pie -s -Os"
 	export RANLIB=${ccompile}ranlib
 	export AR=${ccompile}ar
 	export LD=${ccompile}ld
