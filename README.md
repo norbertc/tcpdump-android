@@ -15,7 +15,7 @@ By default, aarch64 binaries will be built. To build for arm 32-bit:
 
     NDK=/path/to/ndk ARCH=arm ./build-tcpdump
 
-In case, libpcap configure script is having an issue detecting getifaddrs(), patch libpcap configure script:
+In case, libpcap configure script is having an issue detecting getifaddrs(), patch libpcap configure script to use SIOCGIFCONF instead.
 
     patch -p0 < libpcap-configure.patch
 
@@ -39,10 +39,10 @@ Copy BoringSSL libcrypto.so and libssl.so to the NDK platform lib directory (e.g
     cp crypto/libcrypto.so NDK_ROOT/platforms/android-XX/<arch>/usr/lib
     cp ssl/libssl.so NDK_ROOT/platforms/android-XX/<arch>/usr/lib
 
-Patch the configure and configure.in file:
+Patch the configure and configure.in file in the tcpdump source:
 
-    patch -p0 < configure.patch
-    patch -p0 < configure.in.patch
+    patch -p0 < tcpdump-configure.patch
+    patch -p0 < tcpdump-configure.in.patch
 
 Build using ./build-tcpdump
 

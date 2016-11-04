@@ -1,9 +1,10 @@
---- configure	2015-04-23 04:19:15.000000000 +0800
-+++ ../libpcap-1.7.4.new/configure	2016-10-02 12:29:03.000000000 +0800
-@@ -5940,16 +5940,8 @@
+--- configure.orig	2016-11-04 08:52:44.000000000 +0800
++++ configure	2016-11-04 09:01:48.125368681 +0800
+@@ -6152,17 +6152,8 @@
+ 		    V_FINDALLDEVS=fad-getad.c
  
  else
- 
+-
 -		    #
 -		    # We don't have the header - give up.
 -		    # XXX - we could also fall back on some other
@@ -14,8 +15,8 @@
 -		    # we can do on those systems.
 -		    #
 -		    as_fn_error $? "Your system has getifaddrs() but doesn't have a usable <ifaddrs.h>." "$LINENO" 5
-+                    # We don't have the header - use null instead
-+                    V_FINDALLDEVS=null
++                    # We don't have the header - use SIOCGIFCONF instead
++                    V_FINDALLDEVS=fad-gifc.c
  
  fi
  

@@ -9,8 +9,8 @@
 #   Purpose: download & build tcpdump for arm/aarch64 android platform
 #
 # set defaults
-tcpdump_ver=4.7.4
-libpcap_ver=1.7.4
+tcpdump_ver=4.8.1
+libpcap_ver=1.8.1
 android_api_def=24
 toolchain64_def=aarch64-linux-android-4.9
 toolchain32_def=arm-linux-androideabi-4.9
@@ -18,7 +18,7 @@ ccompile64_def=aarch64-linux-android-
 ccompile32_def=arm-linux-androideabi-
 host32_def=arm-linux
 host64_def=aarch64-linux
-ndk_dir_def=/home/norbert/android/android-ndk-r13
+ndk_dir_def=/home/norbert/android/android-ndk-r13b
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
 libpcap_dir=libpcap-${libpcap_ver}
@@ -165,7 +165,7 @@ exit_error()
 	echo "==> Configuring libpcap"
 
 	chmod +x configure
-	./configure --host=${cchost} --with-pcap=linux ac_cv_linux_vers=2 --enable-ipv6
+	./configure --host=${cchost} --with-pcap=linux
 
 	if [ $? -ne 0 ]
 	then
@@ -185,14 +185,14 @@ exit_error()
 	cd ..
 }
 
-# build libpcap
+# build tcpdump
 {
 	cd ${tcpdump_dir}
 	
 	echo "==> Configuring tcpdump"
 	
 	chmod +x configure
-	./configure --host=${cchost} ac_cv_linux_vers=2 --with-crypto --enable-ipv6
+	./configure --host=${cchost} --with-pcap=linux --with-crypto
 
 	if [ $? -ne 0 ]
 	then

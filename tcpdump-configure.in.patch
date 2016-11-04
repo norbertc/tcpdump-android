@@ -1,0 +1,13 @@
+--- configure.in.orig	2016-11-04 15:46:25.624086739 +0800
++++ configure.in	2016-11-04 15:46:52.494086323 +0800
+@@ -934,8 +934,8 @@
+ 	#
+ 	AC_CHECK_HEADER(openssl/crypto.h,
+ 	[
+-		AC_CHECK_LIB(crypto, DES_cbc_encrypt)
+-		if test "$ac_cv_lib_crypto_DES_cbc_encrypt" = "yes"; then
++		AC_CHECK_LIB(crypto, DES_ncbc_encrypt)
++		if test "$ac_cv_lib_crypto_DES_ncbc_encrypt" = "yes"; then
+ 			AC_CHECK_HEADERS(openssl/evp.h)
+ 			#
+ 			# OK, do we have EVP_CIPHER_CTX_new?

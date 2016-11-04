@@ -1,19 +1,19 @@
---- configure.orig
-+++ configure
-@@ -8161,9 +8161,9 @@
- fi
+--- configure.orig	2016-11-04 15:45:45.480087361 +0800
++++ configure	2016-11-04 15:46:15.177086901 +0800
+@@ -8015,9 +8015,9 @@
+ 	ac_fn_c_check_header_mongrel "$LINENO" "openssl/crypto.h" "ac_cv_header_openssl_crypto_h" "$ac_includes_default"
+ if test "x$ac_cv_header_openssl_crypto_h" = xyes; then :
  
- if test "$want_libcrypto" != "no"; then
--	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for DES_cbc_encrypt in -lcrypto" >&5
+-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for DES_cbc_encrypt in -lcrypto" >&5
 -$as_echo_n "checking for DES_cbc_encrypt in -lcrypto... " >&6; }
 -if ${ac_cv_lib_crypto_DES_cbc_encrypt+:} false; then :
-+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for DES_ncbc_encrypt in -lcrypto" >&5
++		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for DES_ncbc_encrypt in -lcrypto" >&5
 +$as_echo_n "checking for DES_ncbc_encrypt in -lcrypto... " >&6; }
 +if ${ac_cv_lib_crypto_DES_ncbc_encrypt+:} false; then :
    $as_echo_n "(cached) " >&6
  else
    ac_check_lib_save_LIBS=$LIBS
-@@ -8177,27 +8177,27 @@
+@@ -8031,27 +8031,27 @@
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -48,3 +48,12 @@
    cat >>confdefs.h <<_ACEOF
  #define HAVE_LIBCRYPTO 1
  _ACEOF
+@@ -8060,7 +8060,7 @@
+ 
+ fi
+ 
+-		if test "$ac_cv_lib_crypto_DES_cbc_encrypt" = "yes"; then
++		if test "$ac_cv_lib_crypto_DES_ncbc_encrypt" = "yes"; then
+ 			for ac_header in openssl/evp.h
+ do :
+   ac_fn_c_check_header_mongrel "$LINENO" "openssl/evp.h" "ac_cv_header_openssl_evp_h" "$ac_includes_default"
