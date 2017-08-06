@@ -1,6 +1,6 @@
---- configure.orig	2016-11-04 15:45:45.480087361 +0800
-+++ configure	2016-11-04 15:46:15.177086901 +0800
-@@ -8015,9 +8015,9 @@
+--- configure.orig	2017-07-23 07:37:54.000000000 +0800
++++ configure	2017-08-07 04:55:24.000000000 +0800
+@@ -8057,9 +8057,9 @@
  	ac_fn_c_check_header_mongrel "$LINENO" "openssl/crypto.h" "ac_cv_header_openssl_crypto_h" "$ac_includes_default"
  if test "x$ac_cv_header_openssl_crypto_h" = xyes; then :
  
@@ -13,7 +13,7 @@
    $as_echo_n "(cached) " >&6
  else
    ac_check_lib_save_LIBS=$LIBS
-@@ -8031,27 +8031,27 @@
+@@ -8073,27 +8073,27 @@
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -48,7 +48,7 @@
    cat >>confdefs.h <<_ACEOF
  #define HAVE_LIBCRYPTO 1
  _ACEOF
-@@ -8060,7 +8060,7 @@
+@@ -8102,7 +8102,7 @@
  
  fi
  
