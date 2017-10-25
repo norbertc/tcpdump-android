@@ -1,5 +1,5 @@
---- configure.orig	2017-07-23 07:37:54.000000000 +0800
-+++ configure	2017-08-07 04:55:24.000000000 +0800
+--- configure.orig
++++ configure
 @@ -8057,9 +8057,9 @@
  	ac_fn_c_check_header_mongrel "$LINENO" "openssl/crypto.h" "ac_cv_header_openssl_crypto_h" "$ac_includes_default"
  if test "x$ac_cv_header_openssl_crypto_h" = xyes; then :

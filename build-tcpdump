@@ -9,7 +9,7 @@
 #   Purpose: download & build tcpdump for arm/aarch64 android platform
 #
 # set defaults
-tcpdump_ver=4.9.1
+tcpdump_ver=4.9.2
 libpcap_ver=1.8.1
 android_api_def=24
 toolchain64_def=aarch64-linux-android-4.9
@@ -18,7 +18,7 @@ ccompile64_def=aarch64-linux-android-
 ccompile32_def=arm-linux-androideabi-
 host32_def=arm-linux
 host64_def=aarch64-linux
-ndk_dir_def=/home/norbert/android/android-ndk-r13b
+ndk_dir_def=/home/norbert/android/android-ndk-r13c
 
 tcpdump_dir=tcpdump-${tcpdump_ver}
 libpcap_dir=libpcap-${libpcap_ver}

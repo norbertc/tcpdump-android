@@ -1,5 +1,5 @@
---- configure.in.orig	2017-07-23 07:33:48.000000000 +0800
-+++ configure.in	2017-08-07 04:54:06.000000000 +0800
+--- configure.in.orig
++++ configure.in
 @@ -931,8 +931,8 @@
  	#
  	AC_CHECK_HEADER(openssl/crypto.h,
@@ -10,4 +10,4 @@
 +		if test "$ac_cv_lib_crypto_DES_ncbc_encrypt" = "yes"; then
  			AC_CHECK_HEADERS(openssl/evp.h)
  			#
- 			# OK, do we have EVP_CIPHER_CTX_new?
+ 			# OK, then:
