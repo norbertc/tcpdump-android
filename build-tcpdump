@@ -12,7 +12,7 @@
 tcpdump_ver=4.9.2
 libpcap_ver=1.8.1
 android_api_def=24
-toolchain64_def=aarch64-linux-android-4.9
+toolchain64_def=aarch64-linux-android
 toolchain32_def=arm-linux-androideabi-4.9
 ccompile64_def=aarch64-linux-android-
 ccompile32_def=arm-linux-androideabi-
